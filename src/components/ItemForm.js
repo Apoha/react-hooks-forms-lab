@@ -1,17 +1,25 @@
-import React from "react";
+
+import React, {useState} from "react";
 import { v4 as uuid } from "uuid";
+import {newItemDataArray} from "./ShoppingList"
 
 function ItemForm(props) {
+
+const[name, setName]  = useState([])
+const [category, setCategory] = useState([])
+
+
+
   return (
-    <form className="NewItem">
+    <form className="NewItem" onSubmit={() =>  props.onItemFormSubmit({newItemDataArray})}>
       <label>
         Name:
-        <input type="text" name="name" />
+        <input onSubmit={props.onItemFormSubmit} type="text" name="name"/>
       </label>
 
       <label>
         Category:
-        <select name="category">
+        <select name="category" value={props.produce}>
           <option value="Produce">Produce</option>
           <option value="Dairy">Dairy</option>
           <option value="Dessert">Dessert</option>
