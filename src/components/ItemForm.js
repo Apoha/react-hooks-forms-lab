@@ -1,25 +1,37 @@
 
 import React, {useState} from "react";
 import { v4 as uuid } from "uuid";
-import {newItemDataArray} from "./ShoppingList"
+
 
 function ItemForm(props) {
 
-const[name, setName]  = useState([])
-const [category, setCategory] = useState([])
+const[name, setName]  = useState("")
+const [category, setCategory] = useState("")
 
 
+function handleOnchangeName(event){
+
+  setName(event.target.value)
+}
+
+
+function handleOnchangeCat(event){
+  setCategory(event.target.value)
+}
 
   return (
-    <form className="NewItem" onSubmit={() =>  props.onItemFormSubmit({newItemDataArray})}>
+    <form className="NewItem" onSubmit={(e) => { e.preventDefault()
+      const id = uuid()
+       props.onItemFormSubmit({name, category, id})
+       }} >
       <label>
         Name:
-        <input onSubmit={props.onItemFormSubmit} type="text" name="name"/>
+        <input onSubmit={props.onItemFormSubmit} onChange={handleOnchangeName} type="text" name="name" value= {name}/>
       </label>
 
       <label>
         Category:
-        <select name="category" value={props.produce}>
+      <select name="category" onChange={handleOnchangeCat} value={category}>
           <option value="Produce">Produce</option>
           <option value="Dairy">Dairy</option>
           <option value="Dessert">Dessert</option>

@@ -4,14 +4,14 @@ import Filter from "./Filter";
 import Item from "./Item";
 import { v4 as uuid } from "uuid";
 
-function ShoppingList({ items, name, category }) {
+function ShoppingList({ items, name, category, setItems }) {
 
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [userSearchedItem, setUserSearchedItem] = useState('')  
   const [selectedItem, setSelectedItem] = useState("All")
   
 
-console.log(userSearchedItem)
+//console.log(userSearchedItem)
 
   function handleCategoryChange(event) {
     setSelectedCategory(event.target.value);
@@ -24,16 +24,18 @@ console.log(userSearchedItem)
 
 
 function handleItemFormSubmit(event){
-event.preventDefault()
+
+  console.log(event)
+//event.preventDefault()
 const newItem = {
   id: uuid(), // the `uuid` library can be used to generate a unique id
-  name: name,
-  category: category,
+  name: event.name,
+  category: event.category,
 };
 
-const newItemDataArray = [...selectedItem, newItem];
+const newItemDataArray = [...items, newItem];
 
-setSelectedItem(newItemDataArray);
+setItems(newItemDataArray);
 }
 
 
